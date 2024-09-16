@@ -131,13 +131,13 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden">
           <ul className="px-4 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-end">
-            {menu.map(({ href, label, className }) => {
+            {menu.map(({ href, label }) => {
               return (
                 <NavItem
                   key={href}
                   href={href}
                   label={label}
-                  className={`block ${className}`}
+                  className={`block hover:text-accent`}
                 />
               );
             })}
