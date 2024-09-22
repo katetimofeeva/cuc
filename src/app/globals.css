@@ -9,8 +9,13 @@
   --font-gotham-bold: "GothamProBold", sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--font-gotham-pro), sans-serif;
+  background-color: "#FFFFFF";
 }
 
 h1,
@@ -20,5 +25,34 @@ h4,
 h5,
 h6 {
   font-family: var(--font-gotham-bold);
-  font-weight: 900;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: normal;
 }

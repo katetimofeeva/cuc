@@ -14,9 +14,13 @@ const config: Config = {
         accent: "#F39C12", // Акцентный цвет
         background: "#FFFFFF", // Цвет фона
         text: "#333333", // Цвет текста
+        accentText: "#008763",
       },
       boxShadow: {
-        "border-shadow": "0 0 20px 0 rgba(169, 214, 229, 0.5)",
+        "border-shadow": "0 3px 14px 0 rgba(169, 214, 229, 0.5)",
+      },
+      backgroundImage: {
+        "main-screen-mob": "url('/sofa-mobile.png')",
       },
     },
   },

@@ -1,12 +1,10 @@
-"use client";
 import Button from "@/app/ui/Button";
 import NavItem from "@/app/ui/NavItem";
-import { useState } from "react";
 
 const menu = [
   {
-    href: "/services",
-    label: "Services",
+    href: "/services/sofa",
+    label: "Cleaning the sofa",
     className: "text-gray-700 hover:text-accent",
   },
   {
@@ -21,22 +19,12 @@ const menu = [
   },
 ];
 
-export default function SideBar() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
+export default function SideBar({ isOpen, toggleSidebar }) {
   return (
-    <div
-      className={`fixed top-[68] left-0 h-full ${
-        isOpen ? "w-64" : "w-20"
-      } bg-primary text-text transition-width duration-300`}
-    >
+    <>
       <Button
         toggleMenu={toggleSidebar}
-        className={"absolute right-0 "}
+        className={"absolute right-0 hover:text-accent"}
       >
         {isOpen ? (
           <svg
@@ -70,6 +58,6 @@ export default function SideBar() {
           ))}
         </ul>
       </nav>
-    </div>
+    </>
   );
 }

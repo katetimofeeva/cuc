@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white/70   border-b-2 border-transparent shadow-border-shadow  fixed w-full z-10">
+    <nav className="bg-background  border-b-2 border-transparent shadow-border-shadow  fixed w-full z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* logo */}
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center md:hidden group">
               <Button
                 toggleMenu={toggleMenu}
-                className={"text-text"}
+                className={"text-text hover:text-accent"}
               >
                 {isOpen ? (
                   <svg
