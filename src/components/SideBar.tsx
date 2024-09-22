@@ -1,6 +1,11 @@
 import Button from "@/app/ui/Button";
 import NavItem from "@/app/ui/NavItem";
 
+interface SideBarProps {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+}
+
 const menu = [
   {
     href: "/services/sofa",
@@ -19,7 +24,7 @@ const menu = [
   },
 ];
 
-export default function SideBar({ isOpen, toggleSidebar }) {
+export default function SideBar({ isOpen, toggleSidebar }: SideBarProps) {
   return (
     <>
       <Button
