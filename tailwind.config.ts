@@ -17,10 +17,16 @@ const config: Config = {
         accentText: "#008763",
       },
       boxShadow: {
-        "border-shadow": "0 3px 14px 0 rgba(169, 214, 229, 0.5)",
+        "border-shadow": "0 4px 8px 0 rgba(0, 0, 0, .059)",
+        "second-shadow": "0 -4px 8px 0 rgba(0, 0, 0, .059)",
+        // "0 3px 14px 0 rgba(169, 214, 229, 0.5)",
       },
       backgroundImage: {
         "main-screen-mob": "url('/sofa-mobile.png')",
+        "custom-gradient":
+          "linear-gradient(167deg, yellow 24.08%, #F39C12 117.07%)",
+        "hover-custom-gradient":
+          "linear-gradient(167deg, yellow 16.08%, #F39C12 97.07%)",
       },
     },
   },

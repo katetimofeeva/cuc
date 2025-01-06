@@ -7,14 +7,14 @@ import Image from "next/image";
 import Button from "@/app/ui/Button";
 
 const menu = [
-  {
-    href: "/services",
-    label: "Services",
-  },
-  {
-    href: "/blog",
-    label: "Blog",
-  },
+  // {
+  //   href: "/services",
+  //   label: "Services",
+  // },
+  // {
+  //   href: "/blog",
+  //   label: "Blog",
+  // },
   {
     href: "/contact",
     label: "Contact",
@@ -40,6 +40,7 @@ const Navbar: React.FC = () => {
                 width={132}
                 height={47}
                 priority
+                className="w-32 h-auto"
               />
             </Link>
           </div>
@@ -83,10 +84,10 @@ const Navbar: React.FC = () => {
             </ul>
 
             {/* burger menu for mobile device */}
-            <div className="flex items-center md:hidden group">
+            <div className="flex items-center md:hidden group bg-custom-gradient rounded-full shadow-border-shadow ">
               <Button
                 toggleMenu={toggleMenu}
-                className={"text-text hover:text-accent"}
+                // className={"text-text hover:text-white"}
               >
                 {isOpen ? (
                   <svg

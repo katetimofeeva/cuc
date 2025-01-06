@@ -1,0 +1,23 @@
+.mainBanner {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  overflow: auto;
+  background-size: cover;
+}
+
+.mainBanner::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, black, transparent);
+}
+.textStroke {
+  color: white;
+  -webkit-text-stroke: 1px var(--deep);
+  text-shadow: -1px -1px 0 var(--deep), 1px -1px 0 var(--deep),
+    -1px 1px 0 var(--deep), 1px 1px 0 var(--deep);
+}

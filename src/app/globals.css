@@ -3,10 +3,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "https://unpkg.com/leaflet/dist/leaflet.css";
 
 :root {
   --font-gotham-pro: "GothamPro", sans-serif;
   --font-gotham-bold: "GothamProBold", sans-serif;
+  --accent: #008763;
+  --deep: #252525;
 }
 
 * {
@@ -55,4 +58,25 @@ h5 {
 h6 {
   font-size: 1rem;
   font-weight: normal;
+}
+
+@keyframes leftToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.inform-card {
+  animation-name: leftToRight;
+
+  animation-duration: 4s;
+}
+
+.image-darken {
+  filter: brightness(0.5);
 }

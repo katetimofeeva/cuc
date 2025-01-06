@@ -1,0 +1,131 @@
+.cardContainer {
+  height: 78vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0px;
+}
+
+.cardContainer .card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -10%;
+  height: 500px;
+  width: 1000px;
+  border-radius: 25px;
+  padding: 50px;
+  transform-origin: top;
+  border: 2px solid var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .cardContainer .card {
+    width: 90%;
+    height: auto;
+    padding: 30px;
+    top: -15%;
+  }
+}
+
+.cardContainer .card h2 {
+  text-align: center;
+  margin: 0px;
+  font-size: 28px;
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card h2 {
+    font-size: 24px;
+  }
+}
+
+.cardContainer .card .body {
+  display: flex;
+  height: 100%;
+  margin-top: 50px;
+  gap: 50px;
+}
+
+@media (max-width: 1024px) {
+  .cardContainer .card .body {
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 30px;
+  }
+}
+
+.cardContainer .card .body .description {
+  width: 40%;
+  position: relative;
+  top: 10%;
+}
+
+@media (max-width: 1024px) {
+  .cardContainer .card .body .description {
+    width: 100%;
+    top: 0;
+  }
+}
+
+.cardContainer .card .body .description p {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card .body .description p {
+    font-size: 14px;
+  }
+}
+
+.cardContainer .card .body .description p::first-letter {
+  font-size: 28px;
+}
+
+.cardContainer .card .body .description span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cardContainer .card .body .description span a {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card .body .description span a {
+    font-size: 10px;
+  }
+}
+
+.cardContainer .card .body .imageContainer {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .cardContainer .card .body .imageContainer {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card .body .imageContainer {
+    height: 200px;
+  }
+}
+
+.cardContainer .card .body .imageContainer .inner {
+  width: 100%;
+  height: 100%;
+}
+
+.cardContainer .card .body .imageContainer img {
+  object-fit: cover;
+}
