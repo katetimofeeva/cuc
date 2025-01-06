@@ -9,7 +9,6 @@ import {
   pricesCards,
   upholsteryCleaningSteps,
 } from "../../data.js";
-import PriceCard from "./ui/price-card/PriceCard";
 import { CUC_PHONE, CUC_EMAIL } from "../../constant";
 import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
