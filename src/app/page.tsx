@@ -3,12 +3,7 @@
 import Image from "next/image";
 import ContactForm from "./ui/ContactForm";
 
-import {
-  prices,
-  stainInfo,
-  pricesCards,
-  upholsteryCleaningSteps,
-} from "../../data.js";
+import { stainInfo, pricesCards, upholsteryCleaningSteps } from "../../data.js";
 import { CUC_PHONE, CUC_EMAIL } from "../../constant";
 import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
@@ -22,13 +17,13 @@ interface FormField {
 
 const formFields: FormField[] = [
   {
-    name: "Name",
+    name: "name",
     placeholder: "Wright your name",
     type: "text",
     className: "rounded-3xl border-solid border-text/20  px-6 py-5 border",
   },
   {
-    name: "Phone number",
+    name: "phone",
     placeholder: "Leave your contact phone",
     type: "tel",
     className: "rounded-3xl border-solid border-text/20  px-6 py-5 border",
