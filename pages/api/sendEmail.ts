@@ -16,7 +16,7 @@ export default async function handler(
         pass: process.env.EMAIL_PASS,
       },
     });
-
+    console.log(process.env.EMAIL_USER, process.env.EMAIL_PASS);
     try {
       // Настройка параметров письма
       const mailOptions = {
