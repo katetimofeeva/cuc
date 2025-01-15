@@ -14,7 +14,6 @@ interface ICard {
 }
 
 const Card = ({ cardInfo, children }: ICard) => {
-  console.log();
   const { title, description, className, card } = cardInfo;
   return (
     <div className={className}>

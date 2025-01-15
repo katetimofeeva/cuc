@@ -16,25 +16,25 @@ export default async function handler(
         pass: process.env.EMAIL_PASS,
       },
     });
-    console.log(process.env.EMAIL_USER, process.env.EMAIL_PASS);
+
     try {
       // Настройка параметров письма
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER, // Кому отправлять сообщения
-        subject: "Новая заявка от клиента",
-        text: `Имя: ${name}\nТелефон: ${phone}`,
+        subject: "New request from a client",
+        text: `Name: ${name}\nPhone: ${phone}`,
       };
 
       // Отправка письма
       await transporter.sendMail(mailOptions);
 
-      res.status(200).json({ message: "Email успешно отправлен!" });
+      res.status(200).json({ message: "Email sent successfully!" });
     } catch (error) {
-      console.error("Ошибка при отправке email:", error);
-      res.status(500).json({ message: "Ошибка сервера при отправке email." });
+      console.error("Error sending email:", error);
+      res.status(500).json({ message: "Server error sending email." });
     }
   } else {
-    res.status(405).json({ message: "Метод не разрешен." });
+    res.status(405).json({ message: "Method not allowed." });
   }
 }

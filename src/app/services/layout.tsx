@@ -4,9 +4,8 @@ import { useState } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(true);
-  console.log(isOpen, "open");
+
   const toggleSidebar = () => {
-    console.log(5);
     setIsOpen(!isOpen);
   };
   return (

@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
 import Button from "./Button";
 import "./style.css";
+import Notification from "../ui/Notification";
 
 interface FormField {
   name: string;
@@ -19,8 +20,19 @@ interface ContactFormProps {
   fields: FormField[];
   btnText: string;
 }
+
+type CustomError = {
+  message: string;
+  [key: string]: any;
+};
+
 const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
   const [formData, setFormData] = useState<FormData>({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [status, setStatus] = useState<
+    "success" | "error" | "info" | "warning" | ""
+  >("");
+  const [message, setMessage] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,22 +55,32 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
       });
 
       if (response.ok) {
-        console.log("Сообщение успешно отправлено!");
+        setStatus("success");
+        setMessage(
+          "Thank you for leaving your contact information! Our employee will contact you shortly."
+        );
       } else {
-        console.log("Ошибка при отправке сообщения.");
+        setStatus("error");
+        setMessage("Error sending message.");
       }
     } catch (error) {
-      console.error("Ошибка:", error);
-      console.log("Ошибка при отправке сообщения.");
+      const typedError = error as CustomError;
+      console.error("Error:", typedError);
+      setMessage(typedError.message);
     }
-
+    setIsOpen(true);
     setFormData({});
+  };
+  const clearForm = () => {
+    setIsOpen(false);
+    setStatus("");
+    setMessage("");
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-8 py-6 rounded-3xl bg-background md:w-2/5 md:ml-8"
+      className="m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-8 py-6 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
     >
       {title && (
         <span className="mx-3 font-semibold text-2xl mb-8 inline-block">
@@ -73,7 +95,7 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
             key={name}
           >
             <label
-              className="text-left mb-5 text-sm"
+              className="text-left mb-5 text-sm first-letter:uppercase"
               htmlFor={name}
             >
               {name}
@@ -105,6 +127,13 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
           />
         </Button>
       </div>
+      {isOpen && (
+        <Notification
+          message={message}
+          onClose={clearForm}
+          type={status}
+        />
+      )}
     </form>
   );
 };
