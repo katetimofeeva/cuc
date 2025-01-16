@@ -87,7 +87,7 @@ export const pricesCards = [
   {
     title: "armchair",
     description: "1 seat",
-    price: "$110",
+    price: "$80",
     src: "/picturePrice/armchair.webp",
     className: "border shadow-border-shadow p-4 rounded-3xl",
   },
@@ -136,7 +136,7 @@ export const pricesCards = [
   {
     title: "area rug",
     description: "Size 8*10",
-    price: "$180",
+    price: "$100",
     src: "/picturePrice/area-rug.webp",
     className: "border shadow-border-shadow p-4 rounded-3xl",
   },
