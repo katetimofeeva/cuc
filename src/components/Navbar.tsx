@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
             <div>
               {/* link to phone number */}
               <a
-                href="tel:+1234567890"
+                href="tel:+17075709711"
                 className="flex items-center space-x-2  group relative"
               >
                 <svg
