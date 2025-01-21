@@ -7,41 +7,39 @@ import { stainInfo, pricesCards, upholsteryCleaningSteps } from "../../data.js";
 import { CUC_PHONE, CUC_EMAIL } from "../../constant";
 import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
+import { IFormField } from "../../type";
 
-interface FormField {
-  name: string;
-  placeholder?: string;
-  className?: string;
-  type: "text" | "tel" | "number";
-}
-
-const formFields: FormField[] = [
+const formFields: IFormField[] = [
   {
     name: "name",
-    placeholder: "Wright your name",
+    placeholder: "Name",
     type: "text",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-5 border",
+    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
   },
   {
     name: "phone",
-    placeholder: "Leave your contact phone",
+    placeholder: "Phone",
     type: "tel",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-5 border",
+    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+  {
+    name: "email",
+    placeholder: "Email",
+    type: "email",
+    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+  {
+    name: "questions",
+    placeholder: "Questions? *",
+    type: "textarea",
+    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      <section className="flex overflow-hidden text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
-        <Image
-          src={"/sofa-big-screen.png"}
-          alt="main screen compony with contact form"
-          width={1440}
-          height={880}
-          priority
-          className="absolute -z-10 max-w-full h-auto image-darken"
-        />
+      <section className="flex overflow-hidden bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
         <div className="md:w-3/5">
           <h2 className="sm:mx-6 mt-8  mb-4 text-white">
             Carpet & Upholstery Cleaning Services
@@ -82,7 +80,7 @@ export default function Home() {
           </div>
         </div>
         <ContactForm
-          title={"Book Now"}
+          title={"Contact Us"}
           fields={formFields}
           btnText="Get a free consultation"
         />

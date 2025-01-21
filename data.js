@@ -1,5 +1,3 @@
-import { title } from "process";
-
 export const prices = [
   {
     title: "CARPET CLEANING",
@@ -73,14 +71,14 @@ export const pricesCards = [
   {
     title: "Small couch",
     description: "2-3 seats",
-    price: "$180",
+    price: "$160",
     src: "/picturePrice/small-couch.webp",
     className: "border shadow-border-shadow p-4 rounded-3xl",
   },
   {
     title: "L-shaper couch",
     description: "4-6 seats",
-    price: "$240",
+    price: "$220",
     src: "/picturePrice/l-shaped-couch.webp",
     className: "border shadow-border-shadow p-4 rounded-3xl",
   },
@@ -94,7 +92,7 @@ export const pricesCards = [
   {
     title: "large sectional",
     description: "7-9+ seats",
-    price: "$360",
+    price: "$300",
     src: "/picturePrice/large-sectional.webp",
     className: "border shadow-border-shadow p-4 rounded-3xl",
   },

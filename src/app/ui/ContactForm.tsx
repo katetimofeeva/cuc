@@ -1,57 +1,63 @@
 "use client";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useRef } from "react";
 import Image from "next/image";
 import Button from "./Button";
 import "./style.css";
 import Notification from "../ui/Notification";
+import { IFormData, IContactFormProps, ICustomError } from "../../../type";
 
-interface FormField {
-  name: string;
-  placeholder?: string;
-  className?: string;
-  type: "text" | "tel" | "number";
-}
-
-interface FormData {
-  [key: string]: string;
-}
-interface ContactFormProps {
-  title: string;
-  fields: FormField[];
-  btnText: string;
-}
-
-type CustomError = {
-  message: string;
-  [key: string]: any;
-};
-
-const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
-  const [formData, setFormData] = useState<FormData>({});
+const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
+  const [formData, setFormData] = useState<IFormData>({});
+  const [files, setFiles] = useState<FileList | null>(null); // Хранение загруженных файлов
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<
     "success" | "error" | "info" | "warning" | ""
   >("");
   const [message, setMessage] = useState<string>("");
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    // Если это загрузка файлов
+    if (e.target.type === "file") {
+      const targetFiles = (e.target as HTMLInputElement).files;
+      if (targetFiles) {
+        setFiles(targetFiles);
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Создание FormData для отправки данных и файлов
+    const formDataToSend = new FormData();
+
+    // Добавляем текстовые поля
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    // Добавляем файлы, если есть
+    if (files) {
+      Array.from(files).forEach(file => {
+        formDataToSend.append("files", file);
+      });
+    }
+
     try {
       const response = await fetch("/api/sendEmail", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
 
       if (response.ok) {
@@ -64,42 +70,54 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
         setMessage("Error sending message.");
       }
     } catch (error) {
-      const typedError = error as CustomError;
+      const typedError = error as ICustomError;
       console.error("Error:", typedError);
       setMessage(typedError.message);
     }
     setIsOpen(true);
     setFormData({});
+    setFiles(null); // Очищаем файлы после отправки
   };
+
   const clearForm = () => {
     setIsOpen(false);
     setStatus("");
     setMessage("");
+    setFiles(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-8 py-6 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
+      className="uppercase m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
     >
       {title && (
-        <span className="mx-3 font-semibold text-2xl mb-8 inline-block">
+        <span className="mx-3 font-semibold text-2xl mb-3 inline-block">
           {title}
         </span>
       )}
 
-      {fields.map(({ name, type, placeholder, className }) => {
-        return (
-          <div
-            className="flex flex-col w-full mb-6"
-            key={name}
-          >
-            <label
-              className="text-left mb-5 text-sm first-letter:uppercase"
-              htmlFor={name}
-            >
-              {name}
-            </label>
+      {fields.map(({ name, type, placeholder, className }) => (
+        <div
+          className="flex flex-col w-full mb-6"
+          key={name}
+        >
+          {type === "textarea" ? (
+            <textarea
+              name={name}
+              id={name}
+              placeholder={placeholder}
+              required
+              className={`${className} h-32 resize-none`}
+              onChange={handleChange}
+              aria-multiline="true"
+              value={formData[name] || ""}
+            />
+          ) : (
             <input
               type={type}
               name={name}
@@ -110,13 +128,32 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
               onChange={handleChange}
               value={formData[name] || ""}
             />
-          </div>
-        );
-      })}
+          )}
+        </div>
+      ))}
+
+      {/* Поле загрузки файлов */}
+      <div className="flex flex-col w-full mb-6">
+        <label
+          htmlFor="files"
+          className="block text-white first-letter:uppercase bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-green-600 transition"
+        >
+          Attach a photo of your furniture
+        </label>
+        <input
+          type="file"
+          id="files"
+          multiple
+          className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+          onChange={handleChange}
+          ref={fileInputRef}
+        />
+      </div>
+
       <div className="btnWrapper btnWrapper_animated">
         <Button
           type="submit"
-          className=" text-black drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2"
+          className="text-black drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2"
         >
           {btnText}
           <Image
@@ -127,6 +164,7 @@ const ContactForm = ({ title, fields = [], btnText }: ContactFormProps) => {
           />
         </Button>
       </div>
+
       {isOpen && (
         <Notification
           message={message}

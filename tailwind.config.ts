@@ -22,7 +22,7 @@ const config: Config = {
         // "0 3px 14px 0 rgba(169, 214, 229, 0.5)",
       },
       backgroundImage: {
-        "main-screen-mob": "url('/sofa-mobile.png')",
+        "main-screen": "url('/sofa-big-screen.png')",
         "custom-gradient":
           "linear-gradient(167deg, yellow 24.08%, #F39C12 117.07%)",
         "hover-custom-gradient":
