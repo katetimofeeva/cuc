@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
-import type { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
 import fs from "fs";
-import type { Attachment } from "nodemailer/lib/mailer";
+import path from "path";
+import { NextApiRequest, NextApiResponse } from "next";
 
+// Отключаем встроенный парсер для работы с formidable
 export const config = {
   api: {
-    bodyParser: false, // Отключаем встроенный парсер для работы с `formidable`
+    bodyParser: false,
   },
 };
 
@@ -16,10 +17,12 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const form = formidable({
-      multiples: true, // Разрешаем загрузку нескольких файлов
+      multiples: true, // Поддержка загрузки нескольких файлов
+      uploadDir: "/tmp", // Временная директория на Vercel
+      keepExtensions: true, // Сохранение расширения файлов
     });
 
-    // Парсинг формы, включая файлы
+    // Парсинг запроса с помощью formidable
     form.parse(req, async (err, fields, files) => {
       if (err) {
         console.error("Error parsing form:", err);
@@ -28,47 +31,47 @@ export default async function handler(
 
       const { name, phone, email, questions } = fields;
 
-      // Настройка транспортера Nodemailer
-      const transporter = nodemailer.createTransport({
-        service: "gmail", // Или другой сервис
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      // Формирование вложений из загруженных файлов
-      const attachments: Attachment[] = [];
-      if (files.files) {
-        const uploadedFiles = Array.isArray(files.files)
-          ? files.files
-          : [files.files];
-
-        uploadedFiles.forEach(file => {
-          attachments.push({
-            filename: file.originalFilename || "unknown",
-            path: file.filepath,
-          });
-        });
+      // Проверяем наличие файлов
+      if (!files.files) {
+        return res.status(400).json({ message: "No files uploaded." });
       }
 
+      const uploadedFiles = Array.isArray(files.files)
+        ? files.files
+        : [files.files];
+
+      // Массив вложений для отправки через email
+      const attachments = uploadedFiles.map(file => ({
+        filename: file.originalFilename || "unknown",
+        path: file.filepath,
+      }));
+
       try {
-        // Настройка параметров письма
+        // Настройка Nodemailer
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER, // Ваш email
+            pass: process.env.EMAIL_PASS, // Ваш пароль приложения
+          },
+        });
+
+        // Настройка письма
         const mailOptions = {
           from: process.env.EMAIL_USER,
           to: process.env.EMAIL_USER,
           subject: "New request from a client",
           text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nQuestions: ${questions}`,
-          attachments, // Добавляем вложения
+          attachments, // Вложения
         };
 
         // Отправка письма
         await transporter.sendMail(mailOptions);
-        console.log(attachments, "attachments");
-        // Удаление временных файлов после отправки
+
+        // Удаление временных файлов
         attachments.forEach(attachment => {
           if (attachment.path && typeof attachment.path === "string") {
-            fs.unlinkSync(attachment.path);
+            fs.unlinkSync(attachment.path); // Удаляем файл после отправки
           }
         });
 
