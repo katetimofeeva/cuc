@@ -93,10 +93,10 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="uppercase m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
+      className="m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
     >
       {title && (
-        <span className="mx-3 font-semibold text-2xl mb-3 inline-block">
+        <span className="uppercase mx-3 font-semibold text-2xl mb-3 inline-block">
           {title}
         </span>
       )}
@@ -136,7 +136,7 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
       <div className="flex flex-col w-full mb-6">
         <label
           htmlFor="files"
-          className="block text-white first-letter:uppercase bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-green-600 transition"
+          className="block text-white  bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-green-600 transition"
         >
           Attach a photo of your furniture
         </label>
@@ -144,7 +144,7 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
           type="file"
           id="files"
           multiple
-          className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+          className="sr-only"
           onChange={handleChange}
           ref={fileInputRef}
         />
