@@ -8,6 +8,7 @@ import { CUC_PHONE, CUC_EMAIL } from "../../constant";
 import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
 import { IFormField } from "../../type";
+import { useRouter } from "next/navigation";
 
 const formFields: IFormField[] = [
   {
@@ -37,6 +38,11 @@ const formFields: IFormField[] = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleClick = (name: string) => {
+    router.push(`/upholstery-cleaning#${name}`);
+  };
   return (
     <>
       <section className="flex overflow-hidden bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
@@ -44,6 +50,11 @@ export default function Home() {
           <h2 className="sm:mx-6 mt-8  mb-4 text-white">
             Carpet & Upholstery Cleaning Services
           </h2>
+          <p className="text-2xl font-bold mb-4 text-black">
+            Our services extend to Santa Rosa and the surrounding areas,
+            including towns like Petaluma, Rohnert Park, Sebastopol, Healdsburg,
+            Napa, and beyond.
+          </p>
           <p className="mt-4 mb-2 text-white   md:px-12 md:hidden ">
             Professional cleaning of upholstery and carpets with on-site service
             at your home or office.
@@ -131,7 +142,10 @@ export default function Home() {
           clean as new!
         </p>
       </section>
-      <section className="text-center px-6">
+      <section
+        className="text-center px-6"
+        id="services"
+      >
         <h2 className="sm:mx-6 mt-8  mb-4  ext-6xl pt-9 uppercase text-2xl lg:text-3xl ">
           <span className=" text-accentText">
             Cost of professional upholstery cleaning
@@ -152,7 +166,7 @@ export default function Home() {
             href={`tel:${CUC_PHONE}`}
           >
             {CUC_PHONE}
-          </a>
+          </a>{" "}
           or email us at
           <a
             href={`mailto:${CUC_EMAIL}`}
@@ -162,6 +176,12 @@ export default function Home() {
             {CUC_EMAIL}
           </a>
         </p>
+        <p className="text-xl">
+          We provide an optional drying service for an additional 30%. With this
+          service, your furniture will be ready to use within 1-3 hours after
+          cleaning. Without drying, the furniture may take 15-24 hours to dry
+          completely
+        </p>
         {pricesCards.length && (
           <div className="grid-cols gap-4 md:gap-8 md:grid-cols-3 lg:grid-cols-5 grid m-6">
             {pricesCards.map((price, i) => {
@@ -169,6 +189,7 @@ export default function Home() {
                 <Card
                   key={`p_${i}`}
                   cardInfo={price}
+                  handleClick={handleClick}
                 >
                   <div className="relative">
                     <Image
@@ -177,7 +198,7 @@ export default function Home() {
                       width={300}
                       height={300}
                     />
-                    <div className="absolute -top-2 -right-2 w-20 h-20 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-custom-gradient text-black text-sm font-bold">
+                    <div className=" absolute -top-2 -right-2 w-20 h-20 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-custom-gradient text-black text-sm font-bold">
                       from <br />
                       {price.price}
                     </div>
@@ -188,10 +209,10 @@ export default function Home() {
           </div>
         )}
         <p className="mb-4 text-start">
-          The furniture cleaning process takes{" "}
+          The furniture cleaning process takes
           <span className="font-bold">1-2 hours</span> for standard cleaning or
           <span className="font-bold"> 2-3 hours</span> (without drying, the
-          furniture takes 12-14 hours to air dry). The price includes cleaning
+          furniture takes 12-24 hours to air dry). The price includes cleaning
           all furniture elements, beds, and sofa cushions; dust removal; deep
           chemical cleaning; stain removal; elimination of unpleasant odors
           (urine, sweat, and more); disinfection (removal of dust mites and

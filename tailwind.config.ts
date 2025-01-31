@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#A9D6E5", // Основной цвет
+        primary: "#4A90E2", // Основной цвет
         secondary: "#A8D5BA", // Вторичный цвет
         accent: "#F39C12", // Акцентный цвет
-        background: "#FFFFFF", // Цвет фона
+        background: "#F8F9FA", // Цвет фона
         text: "#333333", // Цвет текста
         accentText: "#008763",
       },
@@ -24,9 +24,10 @@ const config: Config = {
       backgroundImage: {
         "main-screen": "url('/sofa-big-screen.png')",
         "custom-gradient":
-          "linear-gradient(167deg, yellow 24.08%, #F39C12 117.07%)",
+          "linear-gradient(167deg, yellow 10.08%, #F39C12 110.07%)",
+
         "hover-custom-gradient":
-          "linear-gradient(167deg, yellow 16.08%, #F39C12 97.07%)",
+          "linear-gradient(167deg, yellow 10.08%, #F39C12 80.07%)",
       },
     },
   },

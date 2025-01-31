@@ -6,7 +6,7 @@ import { socialLinks } from "./../../../data";
 export default function Contact() {
   return (
     <div className="min-h-[800px]">
-      <h2 className="text-2xl py-9 text-center uppercase text-accentText">
+      <h2 className="text-3xl py-9 text-center uppercase text-accentText">
         Contacts
       </h2>
       <div className="p-6 rounded-lg text-text max-w-[1000px] mx-auto">
@@ -23,7 +23,7 @@ export default function Contact() {
             <br />
             {CUC_ADDRESS}. We’re always ready to assist you, no matter where you
             are! Our services extend to Santa Rosa and the surrounding areas
-            within a 100-mile radius, including towns like Petaluma, Rohnert
+            within a 30-mile radius, including towns like Petaluma, Rohnert
             Park, Sebastopol, Healdsburg, Napa, and beyond. Feel free to contact
             us, and we’ll be happy to help!
           </p>

@@ -2,7 +2,6 @@
 import { ChangeEvent, FormEvent, useState, useRef } from "react";
 import Image from "next/image";
 import Button from "./Button";
-import "./style.css";
 import Notification from "../ui/Notification";
 import { IFormData, IContactFormProps, ICustomError } from "../../../type";
 
@@ -136,7 +135,7 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
       <div className="flex flex-col w-full mb-6">
         <label
           htmlFor="files"
-          className="block text-white  bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-green-600 transition"
+          className="block text-white bg-primary py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 lg:w-3/4 md:mx-auto"
         >
           Attach a photo of your furniture
         </label>
@@ -150,10 +149,10 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
         />
       </div>
 
-      <div className="btnWrapper btnWrapper_animated">
+      <div>
         <Button
           type="submit"
-          className="text-black drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2"
+          className="mb-4 hover:bg-opacity-80 hover:scale-104 transition-all duration-300 ease-in-out text-black drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2"
         >
           {btnText}
           <Image
@@ -164,7 +163,7 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
           />
         </Button>
       </div>
-
+      <p>You agree to our terms and conditions</p>
       {isOpen && (
         <Notification
           message={message}

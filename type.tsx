@@ -19,3 +19,12 @@ export type ICustomError = {
   message: string;
   [key: string]: any;
 };
+
+export type Category =
+  | "furniture"
+  | "mattress"
+  | "headboard"
+  | "rug cleaning"
+  | "chair";
+export type CleaningOptions = Record<string, number>;
+export type PriceMap = Record<Category, Record<string, CleaningOptions>>;
