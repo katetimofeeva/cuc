@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
               {/* link to phone number */}
               <a
                 href="tel:+17075709711"
-                className="flex items-center space-x-2  group relative"
+                className="[text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] flex items-center space-x-2  group relative"
               >
                 <svg
                   className=" group-focus:text-accent absolute right-[2%] opacity-100 md:group-hover:opacity-0 transition-all duration-500 ease-in-out "

@@ -5,14 +5,20 @@ import Button from "./Button";
 import Notification from "../ui/Notification";
 import { IFormData, IContactFormProps, ICustomError } from "../../../type";
 
-const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
+const ContactForm = ({
+  title,
+  fields = [],
+  btnText,
+  className,
+}: IContactFormProps) => {
   const [formData, setFormData] = useState<IFormData>({});
-  const [files, setFiles] = useState<FileList | null>(null); // Хранение загруженных файлов
+  const [files, setFiles] = useState<FileList | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<
     "success" | "error" | "info" | "warning" | ""
   >("");
   const [message, setMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -21,7 +27,6 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
   ) => {
     const { name, value } = e.target;
 
-    // Если это загрузка файлов
     if (e.target.type === "file") {
       const targetFiles = (e.target as HTMLInputElement).files;
       if (targetFiles) {
@@ -37,16 +42,14 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // Создание FormData для отправки данных и файлов
     const formDataToSend = new FormData();
 
-    // Добавляем текстовые поля
     Object.keys(formData).forEach(key => {
       formDataToSend.append(key, formData[key]);
     });
 
-    // Добавляем файлы, если есть
     if (files) {
       Array.from(files).forEach(file => {
         formDataToSend.append("files", file);
@@ -72,10 +75,13 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
       const typedError = error as ICustomError;
       console.error("Error:", typedError);
       setMessage(typedError.message);
+      setStatus("error");
+    } finally {
+      setIsLoading(false);
     }
     setIsOpen(true);
     setFormData({});
-    setFiles(null); // Очищаем файлы после отправки
+    setFiles(null);
   };
 
   const clearForm = () => {
@@ -92,12 +98,16 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl bg-background md:w-2/5 md:ml-8 relative"
+      className={className}
+      aria-labelledby="form-title"
     >
       {title && (
-        <span className="uppercase mx-3 font-semibold text-2xl mb-3 inline-block">
+        <h2
+          id="form-title"
+          className="uppercase mx-3 font-semibold text-2xl mb-3 inline-block text-accentText"
+        >
           {title}
-        </span>
+        </h2>
       )}
 
       {fields.map(({ name, type, placeholder, className }) => (
@@ -111,10 +121,11 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
               id={name}
               placeholder={placeholder}
               required
-              className={`${className} h-32 resize-none`}
+              className={`${className} h-32 resize-none  `}
               onChange={handleChange}
               aria-multiline="true"
               value={formData[name] || ""}
+              aria-label={placeholder}
             />
           ) : (
             <input
@@ -123,9 +134,10 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
               id={name}
               placeholder={placeholder}
               required
-              className={className}
+              className={`${className} `}
               onChange={handleChange}
               value={formData[name] || ""}
+              aria-label={placeholder}
             />
           )}
         </div>
@@ -135,40 +147,57 @@ const ContactForm = ({ title, fields = [], btnText }: IContactFormProps) => {
       <div className="flex flex-col w-full mb-6">
         <label
           htmlFor="files"
-          className="block text-white bg-primary py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 lg:w-3/4 md:mx-auto"
+          className="block text-white bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 lg:w-3/4 md:mx-auto shadow-md hover:shadow-lg"
         >
           Attach a photo of your furniture
         </label>
         <input
           type="file"
           id="files"
+          name="files"
           multiple
           className="sr-only"
           onChange={handleChange}
           ref={fileInputRef}
+          aria-label="Attach a photo of your furniture"
         />
       </div>
 
       <div>
         <Button
           type="submit"
-          className="mb-4 hover:bg-opacity-80 hover:scale-104 transition-all duration-300 ease-in-out text-black drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2"
+          className="mb-4 hover:bg-opacity-80 hover:scale-105 transition-all duration-300 ease-in-out  drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2 w-full justify-center"
+          disabled={isLoading}
+          aria-label={isLoading ? "Sending form data" : btnText}
         >
-          {btnText}
-          <Image
-            src={"/send.svg"}
-            alt="Send icon"
-            width={16}
-            height={16}
-          />
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              Sending...
+            </div>
+          ) : (
+            <>
+              {btnText}
+              <Image
+                src={"/send.svg"}
+                alt="Send icon"
+                width={16}
+                height={16}
+                aria-hidden="true"
+              />
+            </>
+          )}
         </Button>
       </div>
-      <p>You agree to our terms and conditions</p>
+      <p className="text-sm text-gray-500 text-center">
+        You agree to our terms and conditions
+      </p>
       {isOpen && (
         <Notification
           message={message}
           onClose={clearForm}
           type={status}
+          aria-live="polite"
         />
       )}
     </form>

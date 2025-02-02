@@ -47,15 +47,15 @@ export default function Home() {
     <>
       <section className="flex overflow-hidden bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
         <div className="md:w-3/5">
-          <h2 className="sm:mx-6 mt-8  mb-4 text-white">
+          <h2 className="sm:mx-6  mt-8  mb-4 text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.5)]">
             Carpet & Upholstery Cleaning Services
           </h2>
-          <p className="text-2xl font-bold mb-4 text-black">
+          <p className="text-2xl font-bold mb-4 text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.5)]">
             Our services extend to Santa Rosa and the surrounding areas,
             including towns like Petaluma, Rohnert Park, Sebastopol, Healdsburg,
             Napa, and beyond.
           </p>
-          <p className="mt-4 mb-2 text-white   md:px-12 md:hidden ">
+          <p className="mt-4 mb-2 text-white   md:px-12 md:hidden text-bold">
             Professional cleaning of upholstery and carpets with on-site service
             at your home or office.
           </p>
@@ -94,6 +94,7 @@ export default function Home() {
           title={"Contact Us"}
           fields={formFields}
           btnText="Get a free consultation"
+          className="m-4 md:m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl w-full bg-background md:w-2/5 md:ml-8 relative transition-all duration-300 hover:shadow-lg"
         />
       </section>
       <section className="px-6">
@@ -113,6 +114,7 @@ export default function Home() {
                   alt={card.description}
                   width={card.size || 60}
                   height={60}
+                  loading="lazy"
                 />
               </Card>
             );
@@ -197,6 +199,7 @@ export default function Home() {
                       alt={price.title}
                       width={300}
                       height={300}
+                      loading="lazy"
                     />
                     <div className=" absolute -top-2 -right-2 w-20 h-20 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-custom-gradient text-black text-sm font-bold">
                       from <br />

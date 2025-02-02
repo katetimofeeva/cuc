@@ -24,10 +24,10 @@ const config: Config = {
       backgroundImage: {
         "main-screen": "url('/sofa-big-screen.png')",
         "custom-gradient":
-          "linear-gradient(167deg, yellow 10.08%, #F39C12 110.07%)",
+          "linear-gradient(167deg, #ffec00 10.08%, #F39C12 110.07%)",
 
         "hover-custom-gradient":
-          "linear-gradient(167deg, yellow 10.08%, #F39C12 80.07%)",
+          "linear-gradient(167deg, #ffec00 10.08%, #F39C12 80.07%)",
       },
     },
   },

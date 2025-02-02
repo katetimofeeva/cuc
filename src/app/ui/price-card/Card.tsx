@@ -34,7 +34,7 @@ const Card = ({ cardInfo, children, handleClick }: ICard) => {
       </div>
       {handleClick && (
         <Button
-          className="mb-2 text-white  bg-primary py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-blue-600 transition"
+          className="mb-2 text-white  bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center transform hover:scale-110 transition"
           toggleMenu={customClick}
         >
           Calculate your price

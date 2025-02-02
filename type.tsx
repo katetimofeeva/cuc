@@ -13,6 +13,7 @@ export interface IContactFormProps {
   title: string;
   fields: IFormField[];
   btnText: string;
+  className?: string;
 }
 
 export type ICustomError = {
