@@ -15,8 +15,10 @@ const CustomCheckbox = ({
       onChange={onChange}
       className="hidden peer"
     />
-    <span className="w-5 h-5 flex items-center justify-center border border-gray-400 rounded-full transition peer-checked:border-primary relative">
-      {checked && <span className="w-3 h-3 rounded-full bg-[#4A90E2]"></span>}
+    <span className="w-5 h-5 flex items-center justify-center border-2 border-gray-400 rounded-full transition peer-checked:border-accentText relative">
+      {checked && (
+        <span className="w-2.5 h-2.5 rounded-full bg-accentText"></span>
+      )}
     </span>
   </label>
 );
