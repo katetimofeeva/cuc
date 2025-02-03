@@ -36,11 +36,11 @@ export default function Home() {
           <div className="flex gap-x-1 p-4 rounded-3xl bg-background/90  mx-2 mb-4 md:mx-12 border drop-shadow-md inform-card">
             <Image
               src={"/sofa1.svg"}
-              alt="main screen compony with contact form"
+              alt="European furniture cleaning illustration"
               width={40}
               height={36}
               priority
-            ></Image>
+            />
             <p>
               <span className="font-semibold pr-2">
                 Premium European furniture cleaning:
@@ -52,11 +52,12 @@ export default function Home() {
           <div className="hidden  md:flex gap-x-1 p-4 rounded-3xl bg-background/90  mx-2 mb-4 md:mx-12 border drop-shadow-md inform-card">
             <Image
               src={"/car.svg"}
-              alt="main screen compony with contact form"
+              alt="Mobile cleaning service illustration"
               width={40}
               height={36}
-              priority
-            ></Image>
+              loading="lazy"
+              decoding="async"
+            />
             <p>
               <span className="font-semibold">Professional cleaning </span>
               of upholstery and carpets with on-site service at your home or
