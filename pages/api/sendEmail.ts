@@ -31,14 +31,12 @@ export default async function handler(
 
       const { name, phone, email, questions } = fields;
 
-      // Проверяем наличие файлов
-      if (!files.files) {
-        return res.status(400).json({ message: "No files uploaded." });
-      }
-
-      const uploadedFiles = Array.isArray(files.files)
-        ? files.files
-        : [files.files];
+      // Обработка файлов (если они есть)
+      const uploadedFiles = files.files
+        ? Array.isArray(files.files)
+          ? files.files
+          : [files.files]
+        : [];
 
       // Массив вложений для отправки через email
       const attachments = uploadedFiles.map(file => ({
@@ -62,22 +60,22 @@ export default async function handler(
           to: process.env.EMAIL_USER,
           subject: "New request from a client",
           text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nQuestions: ${questions}`,
-          attachments, // Вложения
+          attachments, // Вложения (могут быть пустыми)
         };
 
         // Отправка письма
         await transporter.sendMail(mailOptions);
 
-        // Удаление временных файлов
-        attachments.forEach(attachment => {
-          if (attachment.path && typeof attachment.path === "string") {
-            fs.unlinkSync(attachment.path); // Удаляем файл после отправки
-          }
-        });
+        // Удаление временных файлов (если они есть)
+        if (attachments.length > 0) {
+          attachments.forEach(attachment => {
+            if (attachment.path && typeof attachment.path === "string") {
+              fs.unlinkSync(attachment.path); // Удаляем файл после отправки
+            }
+          });
+        }
 
-        res
-          .status(200)
-          .json({ message: "Email with files sent successfully!" });
+        res.status(200).json({ message: "Email sent successfully!" });
       } catch (error) {
         console.error("Error sending email:", error);
         res.status(500).json({ message: "Server error sending email." });
