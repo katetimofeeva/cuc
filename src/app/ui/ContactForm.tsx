@@ -10,6 +10,7 @@ const ContactForm = ({
   fields = [],
   btnText,
   className,
+  onCloseModal,
 }: IContactFormProps) => {
   const [formData, setFormData] = useState<IFormData>({});
   const [files, setFiles] = useState<FileList | null>(null);
@@ -82,6 +83,10 @@ const ContactForm = ({
     setIsOpen(true);
     setFormData({});
     setFiles(null);
+
+    if (onCloseModal) {
+      onCloseModal();
+    }
   };
 
   const clearForm = () => {

@@ -14,6 +14,7 @@ export interface IContactFormProps {
   fields: IFormField[];
   btnText: string;
   className?: string;
+  onCloseModal?: () => void;
 }
 
 export type ICustomError = {

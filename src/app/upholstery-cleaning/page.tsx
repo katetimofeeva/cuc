@@ -268,6 +268,12 @@ const UpholsteryCleaning = () => {
     return () => clearTimeout(timerId);
   }, []);
 
+  const handlerOnCloseModal = () => {
+    const timerId = setTimeout(() => {
+      setIsOpen(false);
+    }, 5000);
+    return () => clearTimeout(timerId);
+  };
   const handleClick = () => {
     router.push("/#services");
   };
@@ -357,6 +363,7 @@ const UpholsteryCleaning = () => {
             fields={formFields as IFormField[]}
             btnText={"Sent message"}
             className="border drop-shadow-md px-4 py-3 text-center rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"
+            onCloseModal={handlerOnCloseModal}
           />
           <div className="flex my-4 mx-auto text-center w-48 justify-between flex-col">
             <p className="mb-4">Send message to us </p>
