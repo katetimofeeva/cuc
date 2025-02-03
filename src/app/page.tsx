@@ -137,20 +137,25 @@ export default function Home() {
           provide the final quote after an on-site assessment. For a preliminary
           estimate, please send pictures of your furniture, your location (zip
           code), and any relevant details to{" "}
-          <a
-            className="hover:text-accentText hover:font-bold"
-            href={`tel:${CUC_PHONE}`}
-          >
-            {CUC_PHONE}
-          </a>{" "}
-          or email us at
-          <a
-            href={`mailto:${CUC_EMAIL}`}
-            className="hover:text-accentText  "
-          >
-            {" "}
-            {CUC_EMAIL}
-          </a>
+          {CUC_PHONE && (
+            <a
+              className="hover:text-accentText hover:font-bold"
+              href={`tel:${CUC_PHONE}`}
+              aria-label={`Call us at ${CUC_PHONE}`}
+            >
+              {CUC_PHONE}
+            </a>
+          )}{" "}
+          or email us at{" "}
+          {CUC_EMAIL && (
+            <a
+              href={`mailto:${CUC_EMAIL}`}
+              className="hover:text-accentText"
+              aria-label={`Send an email to ${CUC_EMAIL}`}
+            >
+              {CUC_EMAIL}
+            </a>
+          )}
         </p>
         <p className="text-xl">
           We provide an optional drying service for an additional 30%. With this
@@ -158,7 +163,7 @@ export default function Home() {
           cleaning. Without drying, the furniture may take 15-24 hours to dry
           completely
         </p>
-        {pricesCards.length && (
+        {pricesCards.length > 0 && (
           <div className="grid-cols gap-4 md:gap-8 md:grid-cols-3 lg:grid-cols-5 grid m-6">
             {pricesCards.map((price, i) => {
               return (
@@ -198,7 +203,6 @@ export default function Home() {
         </p>
       </section>
       <section>
-        <h2 className="text-2xl font-bold text-center mb-6 text-text uppercase"></h2>{" "}
         <h2 className="sm:mx-6 mt-8  mb-4 text-center ext-6xl py-9 uppercase text-2xl lg:text-3xl">
           <span className=" text-accentText">Main steps </span> of professional
           carpet cleaning

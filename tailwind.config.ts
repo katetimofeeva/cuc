@@ -22,7 +22,7 @@ const config: Config = {
         // "0 3px 14px 0 rgba(169, 214, 229, 0.5)",
       },
       backgroundImage: {
-        "main-screen": "url('/sofa-big-screen.png')",
+        "main-screen": "url('/sofa-big-screen.webp')",
         "custom-gradient":
           "linear-gradient(167deg, #ffec00 10.08%, #F39C12 110.07%)",
 

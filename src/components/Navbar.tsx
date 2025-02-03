@@ -50,6 +50,7 @@ const Navbar: React.FC = () => {
               <a
                 href="tel:+17075709711"
                 className="[text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] flex items-center space-x-2  group relative"
+                aria-label="Call us at +1 (707) 570-9711"
               >
                 <svg
                   className=" group-focus:text-accent absolute right-[2%] opacity-100 md:group-hover:opacity-0 transition-all duration-500 ease-in-out "
@@ -87,7 +88,9 @@ const Navbar: React.FC = () => {
             <div className="flex items-center md:hidden group bg-custom-gradient rounded-full shadow-border-shadow ">
               <Button
                 toggleMenu={toggleMenu}
-                // className={"text-text hover:text-white"}
+                aria-label="Toggle menu"
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
               >
                 {isOpen ? (
                   <svg
