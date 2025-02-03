@@ -382,6 +382,30 @@ const UpholsteryCleaning = () => {
           </div>
         </Modal>
       )}
+
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 bg-custom-gradient shadow-border-shadow text-black p-4 rounded-full flex items-center gap-2 group z-49 hover:shadow-lg transition-all duration-300 animate-[pulse-scale_2s_ease-in-out_infinite] hover:animate-none focus:animate-none transform-gpu will-change-transform"
+        aria-label="Contact form"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 motion-safe:animate-wiggle transform-gpu will-change-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          />
+        </svg>
+        <span className="text-sm font-medium  px-2 py-1 rounded-full  transform-gpu">
+          Contact us
+        </span>
+      </button>
     </section>
   );
 };

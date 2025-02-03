@@ -29,6 +29,20 @@ const config: Config = {
         "hover-custom-gradient":
           "linear-gradient(167deg, #ffec00 10.08%, #F39C12 80.07%)",
       },
+      animation: {
+        "pulse-scale": "pulse-scale 2s ease-in-out infinite",
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
+      keyframes: {
+        "pulse-scale": {
+          "0%, 100%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(1.05)", opacity: "0.9" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+      },
     },
   },
   plugins: [],
