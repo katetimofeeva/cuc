@@ -19,7 +19,7 @@ export default function Home() {
   };
   return (
     <>
-      <section className="flex overflow-hidden bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
+      <section className="flex overflow-hidden bg-main-screen-mob lg:bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
         <div className="md:w-3/5">
           <h2 className="sm:mx-6  mt-8  mb-4 text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.5)]">
             Carpet & Upholstery Cleaning Services

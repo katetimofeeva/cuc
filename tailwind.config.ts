@@ -23,6 +23,7 @@ const config: Config = {
       },
       backgroundImage: {
         "main-screen": "url('/sofa-big-screen.webp')",
+        "main-screen-mob": "url('/main-screen-mob.webp')",
         "custom-gradient":
           "linear-gradient(167deg, #ffec00 10.08%, #F39C12 110.07%)",
 
