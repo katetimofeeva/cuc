@@ -1,9 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PriceForm from "../ui/PriceForm";
-import { PriceMap, Category } from "../../../type";
+import { PriceMap, Category, IFormField } from "../../../type";
+import Modal from "../ui/Modal";
+import ContactForm from "../ui/ContactForm";
+import { formFields, socialLinks } from "../../../data";
+import SocialLinks from "../ui/SocialLinks";
 
 const priceMap: PriceMap = {
   furniture: {
@@ -254,6 +258,15 @@ const UpholsteryCleaning = () => {
       isOpen: false,
     },
   });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setIsOpen(true);
+    }, 10000);
+
+    return () => clearTimeout(timerId);
+  }, []);
 
   const handleClick = () => {
     router.push("/#services");
@@ -296,12 +309,12 @@ const UpholsteryCleaning = () => {
       <h1 className="text-2xl font-bold text-center text-text sm:text-3xl">
         Upholstery Cleaning
       </h1>
-      <p
-        className="text-accentText text-3xl font-bold uppercase cursor-pointer hover:underline"
+      <button
+        className="text-accentText text-3xl font-bold uppercase cursor-pointer "
         onClick={handleClick}
       >
         All services
-      </p>
+      </button>
       <p className="text-sm text-gray-500 sm:text-base">
         Minimum order $120, additional pillows are not included in the price.
       </p>
@@ -332,6 +345,36 @@ const UpholsteryCleaning = () => {
           id={category}
         />
       ))}
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          ariaLabelledby={"Contact us"}
+          className="m-8 border drop-shadow-md p-4 rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"
+        >
+          <ContactForm
+            title={"Contact us"}
+            fields={formFields as IFormField[]}
+            btnText={"Sent message"}
+            className="border drop-shadow-md px-4 py-3 text-center rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"
+          />
+          <div className="flex my-4 mx-auto text-center w-48 justify-between flex-col">
+            <p className="mb-4">Send message to us </p>
+            <div className="flex w-48 justify-between flex-row">
+              {socialLinks.map(({ src, alt, href }) => {
+                return (
+                  <SocialLinks
+                    key={alt}
+                    src={src}
+                    alt={alt}
+                    href={href}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </Modal>
+      )}
     </section>
   );
 };

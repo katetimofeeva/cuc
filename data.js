@@ -567,3 +567,30 @@ export const categories = {
     "12x14 feet",
   ],
 };
+
+export const formFields = [
+  {
+    name: "name",
+    placeholder: "Name",
+    type: "text",
+    classField: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+  {
+    name: "phone",
+    placeholder: "Phone",
+    type: "tel",
+    classField: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+  {
+    name: "email",
+    placeholder: "Email",
+    type: "email",
+    classField: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+  {
+    name: "questions",
+    placeholder: "Questions? *",
+    type: "textarea",
+    classField: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
+  },
+];

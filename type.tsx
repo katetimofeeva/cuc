@@ -1,7 +1,7 @@
 export interface IFormField {
   name: string;
   placeholder?: string;
-  className?: string;
+  classField?: string;
   type: "text" | "tel" | "number" | "email" | "textarea" | "file";
 }
 
@@ -29,3 +29,11 @@ export type Category =
   | "chair";
 export type CleaningOptions = Record<string, number>;
 export type PriceMap = Record<Category, Record<string, CleaningOptions>>;
+
+export interface IPropsModal {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  ariaLabelledby?: string;
+  className: string;
+}

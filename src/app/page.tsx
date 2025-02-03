@@ -9,33 +9,7 @@ import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
 import { IFormField } from "../../type";
 import { useRouter } from "next/navigation";
-
-const formFields: IFormField[] = [
-  {
-    name: "name",
-    placeholder: "Name",
-    type: "text",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
-  },
-  {
-    name: "phone",
-    placeholder: "Phone",
-    type: "tel",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
-  },
-  {
-    name: "email",
-    placeholder: "Email",
-    type: "email",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
-  },
-  {
-    name: "questions",
-    placeholder: "Questions? *",
-    type: "textarea",
-    className: "rounded-3xl border-solid border-text/20  px-6 py-4 border",
-  },
-];
+import { formFields } from "../../data";
 
 export default function Home() {
   const router = useRouter();
@@ -92,7 +66,7 @@ export default function Home() {
         </div>
         <ContactForm
           title={"Contact Us"}
-          fields={formFields}
+          fields={formFields as IFormField[]}
           btnText="Get a free consultation"
           className="m-4 md:m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl w-full bg-background md:w-2/5 md:ml-8 relative transition-all duration-300 hover:shadow-lg"
         />

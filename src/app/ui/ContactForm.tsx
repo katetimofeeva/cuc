@@ -110,7 +110,7 @@ const ContactForm = ({
         </h2>
       )}
 
-      {fields.map(({ name, type, placeholder, className }) => (
+      {fields.map(({ name, type, placeholder, classField }) => (
         <div
           className="flex flex-col w-full mb-6"
           key={name}
@@ -121,7 +121,7 @@ const ContactForm = ({
               id={name}
               placeholder={placeholder}
               required
-              className={`${className} h-32 resize-none  `}
+              className={`${classField} h-32 resize-none  `}
               onChange={handleChange}
               aria-multiline="true"
               value={formData[name] || ""}
@@ -134,7 +134,7 @@ const ContactForm = ({
               id={name}
               placeholder={placeholder}
               required
-              className={`${className} `}
+              className={`${classField} `}
               onChange={handleChange}
               value={formData[name] || ""}
               aria-label={placeholder}
