@@ -22,16 +22,15 @@ export default function Home() {
       <section className="flex overflow-hidden bg-main-screen-mob lg:bg-main-screen bg-no-repeat bg-cover bg-center text-text p-6 text-center flex-col md:flex-row items-center md:items-start relative md:p-0 lg:gap-8 ">
         <div className="md:w-3/5">
           <h2 className="sm:mx-6  mt-8  mb-4 text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.5)]">
-            Carpet & Upholstery Cleaning Services
+            Professional Carpet & Upholstery Cleaning
           </h2>
           <p className="text-2xl font-bold mb-4 text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.5)]">
-            Our services extend to Santa Rosa and the surrounding areas,
-            including towns like Petaluma, Rohnert Park, Sebastopol, Healdsburg,
-            Napa, and beyond.
+            Serving Santa Rosa, Petaluma, Rohnert Park, Sebastopol, Healdsburg,
+            Napa & Nearby Areas.
           </p>
-          <p className="mt-4 mb-2 text-white   md:px-12 md:hidden text-bold">
-            Professional cleaning of upholstery and carpets with on-site service
-            at your home or office.
+          <p className="mt-4 mb-2 text-text   md:px-12 md:hidden text-bold">
+            Expert on-site upholstery and carpet cleaning for your home or
+            office, ensuring freshness and hygiene.
           </p>
           <div className="flex gap-x-1 p-4 rounded-3xl bg-background/90  mx-2 mb-4 md:mx-12 border drop-shadow-md inform-card">
             <Image
@@ -43,10 +42,10 @@ export default function Home() {
             />
             <p>
               <span className="font-semibold pr-2">
-                Premium European furniture cleaning:
+                Premium European cleaning standards:
               </span>
-              We use advanced technologies and quality standards adopted in
-              Europe.
+              Advanced technologies for deep cleaning and long-lasting
+              freshness.
             </p>
           </div>
           <div className="hidden  md:flex gap-x-1 p-4 rounded-3xl bg-background/90  mx-2 mb-4 md:mx-12 border drop-shadow-md inform-card">
@@ -59,14 +58,13 @@ export default function Home() {
               decoding="async"
             />
             <p>
-              <span className="font-semibold">Professional cleaning </span>
-              of upholstery and carpets with on-site service at your home or
-              office.
+              <span className="font-semibold">Convenient mobile service</span>
+              at your location for hassle-free cleaning.
             </p>
           </div>
         </div>
         <ContactForm
-          title={"Contact Us"}
+          title={"Get a Free Estimate"}
           fields={formFields as IFormField[]}
           btnText="Get a free consultation"
           className="m-4 md:m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl w-full bg-background md:w-2/5 md:ml-8 relative transition-all duration-300 hover:shadow-lg"
@@ -74,7 +72,7 @@ export default function Home() {
       </section>
       <section className="px-6">
         <h2 className="sm:mx-6 mt-8  mb-4 text-center ext-6xl py-9 uppercase text-2xl lg:text-3xl ">
-          Deep cleaning of upholstered furniture from{" "}
+          Deep upholstery cleaning for{" "}
           <span className=" text-accentText">stains and odors</span>.
         </h2>
         <div className="grid-cols-2 gap-4 md:gap-8 md:grid-cols-3 lg:grid-cols-5 grid ">
@@ -96,7 +94,7 @@ export default function Home() {
           })}
         </div>
         <h3 className="font-semibold text-text mt-8  mb-4">
-          Cleaning furniture at home from all known contaminants
+          Say 'Goodbye' to stubborn stains & odors!
         </h3>
         <p className="mb-2">
           Spilled coffee on your favorite couch? Did your pet leave an
@@ -125,19 +123,22 @@ export default function Home() {
       >
         <h2 className="sm:mx-6 mt-8  mb-4  ext-6xl pt-9 uppercase text-2xl lg:text-3xl ">
           <span className=" text-accentText">
-            Cost of professional upholstery cleaning
+            Affordable upholstery cleaning
           </span>{" "}
-          with on-site Service
+          at your doorstep
         </h2>
-
-        <h4 className="mb-2 ">20% discount for the first order</h4>
+        <h4 className="mb-2 font-bold text-lg">
+          Limited Time: 20% Off First Order!
+        </h4>
         <p className=" md:w-3/4 m-auto mb-4">
           *Pricing for upholstery cleaning is based on factors such as the
           number of seats, the extent of stains or soiling, the type of fabric,
           and the complexity of the cleaning process. Our technician will
-          provide the final quote after an on-site assessment. For a preliminary
-          estimate, please send pictures of your furniture, your location (zip
-          code), and any relevant details to{" "}
+          provide the final quote after an on-site assessment.
+        </p>{" "}
+        <p className="mb-4">
+          Get a quote today! Share pictures of your furniture, location (zip
+          code), and any relevant details via{" "}
           {CUC_PHONE && (
             <a
               className="hover:text-accentText hover:font-bold"
@@ -158,7 +159,7 @@ export default function Home() {
             </a>
           )}
         </p>
-        <p className="text-xl">
+        <p>
           We provide an optional drying service for an additional 30%. With this
           service, your furniture will be ready to use within 1-3 hours after
           cleaning. Without drying, the furniture may take 15-24 hours to dry
@@ -192,7 +193,7 @@ export default function Home() {
           </div>
         )}
         <p className="mb-4 text-start">
-          The furniture cleaning process takes
+          Professional cleaning Process
           <span className="font-bold">1-2 hours</span> for standard cleaning or
           <span className="font-bold"> 2-3 hours</span> (without drying, the
           furniture takes 12-24 hours to air dry). The price includes cleaning
@@ -205,8 +206,8 @@ export default function Home() {
       </section>
       <section>
         <h2 className="sm:mx-6 mt-8  mb-4 text-center ext-6xl py-9 uppercase text-2xl lg:text-3xl">
-          <span className=" text-accentText">Main steps </span> of professional
-          carpet cleaning
+          Step-by-Step{" "}
+          <span className="text-accentText">professional cleaning process</span>
         </h2>
         <ProcessSteps steps={upholsteryCleaningSteps} />;
       </section>

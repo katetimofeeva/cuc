@@ -275,46 +275,84 @@ export const socialLinks = [
   },
 ];
 
+// export const upholsteryCleaningSteps = [
+//   {
+//     title: "Inspection and preparation",
+//     description:
+//       "The technician examines the furniture, determines its type and level of dirt, and tests the fabric for colorfastness. Surrounding items are moved to ensure full access to the furniture.",
+//   },
+//   {
+//     title: "Dry cleaning",
+//     description:
+//       "A high-powered vacuum removes dust, pet hair, sand, and other debris to protect the fabric during deep cleaning.",
+//   },
+//   {
+//     title: "Spot treatment",
+//     description:
+//       "Stubborn stains are pre-treated with special, safe cleaning solutions for effective removal.",
+//   },
+//   {
+//     title: "Deep cleaning (Extraction)",
+//     description:
+//       "We use professional extractors with hot or cold water to remove dirt, dust, and allergens from deep within the fabric fibers.",
+//   },
+//   {
+//     title: "Rinsing and residue removal",
+//     description:
+//       "The furniture is thoroughly rinsed with water to eliminate any remaining cleaning solution and prevent residue buildup.",
+//   },
+//   {
+//     title: "Disinfection and Fabric Protection (optional)",
+//     description:
+//       "The furniture is treated with antibacterial solutions to kill germs and dust mites, and a protective coating is applied to prevent future stains.",
+//   },
+//   {
+//     title: "Moisture removal and drying",
+//     description:
+//       "Professional equipment removes excess moisture, ensuring the furniture dries quickly and thoroughly.",
+//   },
+//   {
+//     title: "Final inspection",
+//     description:
+//       "The technician inspects the final result to ensure the furniture is clean, and additional treatments are applied if needed.",
+//   },
+// ];
+
 export const upholsteryCleaningSteps = [
   {
     title: "Inspection and preparation",
     description:
-      "The technician examines the furniture, determines its type and level of dirt, and tests the fabric for colorfastness. Surrounding items are moved to ensure full access to the furniture.",
+      "Our specialist examines your furniture, identifies stains, and tests the fabric for safety. We also prepare the area by moving nearby items for full access.",
   },
   {
     title: "Dry cleaning",
     description:
-      "A high-powered vacuum removes dust, pet hair, sand, and other debris to protect the fabric during deep cleaning.",
+      "A powerful vacuum removes dust, pet hair, and allergens, ensuring they don’t turn into muddy residues during cleaning.",
   },
   {
-    title: "Spot treatment",
+    title: "Stain treatment",
     description:
       "Stubborn stains are pre-treated with special, safe cleaning solutions for effective removal.",
   },
   {
-    title: "Deep cleaning (Extraction)",
+    title: "Deep cleaning",
     description:
-      "We use professional extractors with hot or cold water to remove dirt, dust, and allergens from deep within the fabric fibers.",
+      "Professional equipment with hot water removes dirt, bacteria, and allergens trapped deep in the fabric.",
   },
   {
     title: "Rinsing and residue removal",
     description:
-      "The furniture is thoroughly rinsed with water to eliminate any remaining cleaning solution and prevent residue buildup.",
+      "We thoroughly rinse the furniture to remove all cleaning solutions, preventing sticky residues.",
   },
   {
-    title: "Disinfection and Fabric Protection (optional)",
+    title: "Sanitization and protection",
     description:
-      "The furniture is treated with antibacterial solutions to kill germs and dust mites, and a protective coating is applied to prevent future stains.",
+      "We disinfect to eliminate bacteria and odors, leaving your furniture fresh and hygienic. Optional fabric protection prevents future stains.",
   },
   {
-    title: "Moisture removal and drying",
+    title: "Drying and final check",
     description:
-      "Professional equipment removes excess moisture, ensuring the furniture dries quickly and thoroughly.",
-  },
-  {
-    title: "Final inspection",
-    description:
-      "The technician inspects the final result to ensure the furniture is clean, and additional treatments are applied if needed.",
+      "Excess moisture is removed for quick drying. Our technician performs a final inspection to ensure perfect results.",
   },
 ];
 
