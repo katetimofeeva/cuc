@@ -263,7 +263,7 @@ const UpholsteryCleaning = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setIsOpen(true);
-    }, 10000);
+    }, 15000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -313,7 +313,7 @@ const UpholsteryCleaning = () => {
   return (
     <section className="flex flex-col items-center px-4 py-6 space-y-6 my-6 shadow-border-shadow rounded-2xl max-w-lg mx-auto sm:px-6 sm:py-8 md:max-w-xl lg:max-w-2xl">
       <h1 className="text-2xl font-bold text-center text-text sm:text-3xl">
-        Upholstery Cleaning
+        Carpet & upholstery cleaning services
       </h1>
       <button
         className="text-accentText text-3xl font-bold uppercase cursor-pointer "
