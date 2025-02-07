@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://cuc-nine.vercel.app
+
+# Sitemaps
+Sitemap: https://cuc-nine.vercel.app/sitemap.xml

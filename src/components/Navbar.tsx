@@ -8,10 +8,6 @@ import Button from "@/app/ui/Button";
 
 const menu = [
   // {
-  //   href: "/services",
-  //   label: "Services",
-  // },
-  // {
   //   href: "/blog",
   //   label: "Blog",
   // },

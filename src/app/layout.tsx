@@ -5,12 +5,21 @@ import Footer from "@/components/Footer";
 
 // Метаданные для SEO
 export const metadata: Metadata = {
-  title:
-    "Professional Upholstery & Carpet Cleaning Services in Santa Rosa | Pro CUC",
+  title: "Upholstery & Carpet Cleaning Services in Santa Rosa | Pro-CUC",
   description:
-    "Professional upholstery and carpet cleaning services in Santa Rosa and surrounding areas. We remove stains, odors, and allergens using eco-friendly methods. Free consultation available.",
-  keywords:
-    "upholstery cleaning, carpet cleaning, stain removal, odor removal, Santa Rosa, Petaluma, Rohnert Park, eco-friendly cleaning",
+    "Professional carpet and upholstery cleaning in Santa Rosa. We eliminate stains, odors, and allergens using eco-friendly methods for a healthier home. Trusted experts, impeccable results!",
+  keywords: [
+    "upholstery cleaning",
+    "carpet cleaning",
+    "stain removal",
+    "odor removal",
+    "Santa Rosa cleaning services",
+    "Petaluma",
+    "upholstery cleaning santa rosa",
+    "carpet cleaning in santa rosa",
+    "eco-friendly cleaning",
+  ],
+  metadataBase: new URL("https://cuc-nine.vercel.app"),
   authors: [
     {
       name: "Pro Carpet & Upholstery Cleaning Company",
@@ -18,10 +27,9 @@ export const metadata: Metadata = {
     },
   ],
   openGraph: {
-    title:
-      "Professional Upholstery & Carpet Cleaning Services in Santa Rosa | Pro CUC",
+    title: "Upholstery & Carpet Cleaning Services in Santa Rosa | Pro-CUC",
     description:
-      "Professional upholstery and carpet cleaning services in Santa Rosa and surrounding areas. We remove stains, odors, and allergens using eco-friendly methods.",
+      "Professional carpet and upholstery cleaning in Santa Rosa. We eliminate stains, odors, and allergens using eco-friendly methods for a healthier home. Trusted experts, impeccable results!",
     images: [
       {
         url: "/logo.svg",
