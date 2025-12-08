@@ -9,13 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#4A90E2", // Основной цвет
-        secondary: "#A8D5BA", // Вторичный цвет
-        accent: "#F39C12", // Акцентный цвет
-        background: "#F8F9FA", // Цвет фона
-        text: "#333333", // Цвет текста
-        accentText: "#008763",
+        primary: "#2E5A47",
+        secondary: "#A3D9C6",
+        accent: "#F6A700",
+        background: "#FAFAF8",
+        text: "#2A2A2A",
+        accentText: "#0A7C5B",
       },
+
       boxShadow: {
         "border-shadow": "0 4px 8px 0 rgba(0, 0, 0, .059)",
         "second-shadow": "0 -4px 8px 0 rgba(0, 0, 0, .059)",

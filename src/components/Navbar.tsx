@@ -11,6 +11,11 @@ const menu = [
   //   href: "/blog",
   //   label: "Blog",
   // },
+  { href: "/", label: "Home" },
+  {
+    href: "/upholstery-cleaning",
+    label: "Services",
+  },
   {
     href: "/contact",
     label: "Contact",
@@ -138,6 +143,7 @@ const Navbar: React.FC = () => {
                   href={href}
                   label={label}
                   className={`block hover:text-accent`}
+                  onClick={() => setIsOpen(false)}
                 />
               );
             })}

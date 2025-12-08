@@ -14,12 +14,14 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   children,
   type = "button",
+  disabled = false,
 }) => {
   return (
     <button
       type={type}
       className={`inline-flex items-center justify-center p-2   focus:outline-none ${className}`}
       onClick={toggleMenu}
+      disabled={disabled}
     >
       {children}
     </button>

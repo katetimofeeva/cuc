@@ -5,12 +5,23 @@ interface NavItemProps {
   href: string;
   label: string;
   className?: string;
+  onClick?: () => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ href, className, label }) => {
+const NavItem: React.FC<NavItemProps> = ({
+  href,
+  className,
+  label,
+  onClick,
+}) => {
   return (
     <li className={className}>
-      <Link href={href}>{label}</Link>
+      <Link
+        href={href}
+        onClick={onClick}
+      >
+        {label}
+      </Link>
     </li>
   );
 };

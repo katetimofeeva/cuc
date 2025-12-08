@@ -6,10 +6,10 @@ import { socialLinks } from "./../../../data";
 export default function Contact() {
   return (
     <div className="min-h-[800px]">
-      <h2 className="text-3xl py-9 text-center uppercase text-accentText">
+      <h2 className="text-3xl py-4 text-center uppercase text-accentText">
         Contacts
       </h2>
-      <div className="p-6 rounded-lg text-text max-w-[1000px] mx-auto">
+      <div className="p-6 py-2 rounded-lg text-text max-w-[1000px] mx-auto">
         <p className="text-lg text-center mb-6">
           We’re here to help with all your furniture, carpet, and rug cleaning
           needs. Whether you have questions about our services, need to book an
@@ -30,12 +30,18 @@ export default function Contact() {
           <p className="mb-4">
             <strong>Call us at:</strong>
             <br />
-            {CUC_PHONE} for prompt assistance, our customer service team is
-            available Monday to Saturday from 9 AM to 8 PM.
+            <a
+              href={`tel:${CUC_PHONE}`}
+              className={` hover:text-accentText`}
+            >
+              {CUC_PHONE} {""}
+            </a>
+            for prompt assistance, our customer service team is available Monday
+            to Saturday from 9 AM to 8 PM.
           </p>
           <div>
             <p>Send message to us </p>
-            <div className="flex w-20 justify-between ">
+            <div className="flex w-20 justify-between gap-2">
               {socialLinks.map(({ src, alt, href }) => {
                 return (
                   <SocialLinks

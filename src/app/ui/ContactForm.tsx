@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, FormEvent, useState, useRef } from "react";
+import { ChangeEvent, FormEvent, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Button from "./Button";
 import Notification from "../ui/Notification";
@@ -13,7 +13,16 @@ const ContactForm = ({
   onCloseModal,
 }: IContactFormProps) => {
   const [formData, setFormData] = useState<IFormData>({});
-  const [files, setFiles] = useState<FileList | null>(null);
+  // используем массив File для удобного управления и удаления
+  const [files, setFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<
+    {
+      name: string;
+      url: string;
+      type?: string;
+      size?: number;
+    }[]
+  >([]);
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<
     "success" | "error" | "info" | "warning" | ""
@@ -31,7 +40,28 @@ const ContactForm = ({
     if (e.target.type === "file") {
       const targetFiles = (e.target as HTMLInputElement).files;
       if (targetFiles) {
-        setFiles(targetFiles);
+        const arr = Array.from(targetFiles);
+        // объединяем новые файлы с уже выбранными, избегая дубликатов (по имени+size+type)
+        const merged = [...files, ...arr].filter(
+          (f, idx, self) =>
+            idx ===
+            self.findIndex(
+              s => s.name === f.name && s.size === f.size && s.type === f.type
+            )
+        );
+        setFiles(merged);
+        // очищаем предыдущие object URLs
+        previews.forEach(pv => URL.revokeObjectURL(pv.url));
+        // создаём превью для merged
+        const p = merged.map(f => ({
+          name: f.name,
+          url: URL.createObjectURL(f),
+          type: f.type,
+          size: f.size,
+        }));
+        setPreviews(p);
+        // сброс native input чтобы позволить выбрать те же файлы снова и триггерить событие
+        if (fileInputRef.current) fileInputRef.current.value = "";
       }
     } else {
       setFormData({
@@ -51,8 +81,8 @@ const ContactForm = ({
       formDataToSend.append(key, formData[key]);
     });
 
-    if (files) {
-      Array.from(files).forEach(file => {
+    if (files && files.length > 0) {
+      files.forEach(file => {
         formDataToSend.append("files", file);
       });
     }
@@ -82,7 +112,11 @@ const ContactForm = ({
     }
     setIsOpen(true);
     setFormData({});
-    setFiles(null);
+    // очищаем файлы и превью
+    files.forEach(() => {});
+    setFiles([]);
+    previews.forEach(p => URL.revokeObjectURL(p.url));
+    setPreviews([]);
 
     if (onCloseModal) {
       onCloseModal();
@@ -93,11 +127,30 @@ const ContactForm = ({
     setIsOpen(false);
     setStatus("");
     setMessage("");
-    setFiles(null);
+    setFiles([]);
+    previews.forEach(p => URL.revokeObjectURL(p.url));
+    setPreviews([]);
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+  };
+
+  // при размонтировании / изменении превью — очищаем object URLs
+  useEffect(() => {
+    return () => {
+      previews.forEach(p => URL.revokeObjectURL(p.url));
+    };
+  }, [previews]);
+
+  const removeFileAt = (index: number) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
+    setPreviews(prev => {
+      const removed = prev[index];
+      if (removed) URL.revokeObjectURL(removed.url);
+      return prev.filter((_, i) => i !== index);
+    });
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   return (
@@ -152,7 +205,7 @@ const ContactForm = ({
       <div className="flex flex-col w-full mb-6">
         <label
           htmlFor="files"
-          className="block text-white bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 lg:w-3/4 md:mx-auto shadow-md hover:shadow-lg"
+          className="block text-white bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 w-full md:mx-auto shadow-md hover:shadow-lg"
         >
           Attach a photo of your furniture
         </label>
@@ -166,6 +219,52 @@ const ContactForm = ({
           ref={fileInputRef}
           aria-label="Attach a photo of your furniture"
         />
+        {previews.length > 0 && (
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            {previews.map((p, i) => (
+              <div
+                key={p.url}
+                className="relative border rounded-md overflow-hidden p-1 bg-white flex flex-col items-center justify-center"
+              >
+                {p.type && p.type.startsWith("image") ? (
+                  // маленькое превью
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.url}
+                    alt={p.name}
+                    className="w-20 h-20 object-cover"
+                  />
+                ) : (
+                  <div className="w-20 h-20 flex items-center justify-center bg-gray-100">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6 text-gray-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 7h10M7 11h10M7 15h10"
+                      />
+                    </svg>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => removeFileAt(i)}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                  aria-label={`Remove ${p.name}`}
+                >
+                  ×
+                </button>
+                <div className="text-xs mt-1 text-center">{p.name}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div>

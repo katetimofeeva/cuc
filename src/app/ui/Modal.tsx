@@ -45,7 +45,7 @@ const Modal = ({
       <div className={`relative bg-white   max-w-md w-full mx-2 ${className}`}>
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-text hover:text-accentText z-40"
+          className="absolute top-2 right-2 text-grey hover:text-accentText z-40"
           aria-label="Close modal"
         >
           <svg

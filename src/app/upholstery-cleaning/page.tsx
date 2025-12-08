@@ -263,7 +263,7 @@ const UpholsteryCleaning = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setIsOpen(true);
-    }, 15000);
+    }, 45000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -313,7 +313,7 @@ const UpholsteryCleaning = () => {
   return (
     <section className="flex flex-col items-center px-4 py-6 space-y-6 my-6 shadow-border-shadow rounded-2xl max-w-lg mx-auto sm:px-6 sm:py-8 md:max-w-xl lg:max-w-2xl">
       <h1 className="text-2xl font-bold text-center text-text sm:text-3xl">
-        Carpet & upholstery cleaning services
+        Estimate Your Upholstery Cleaning Cost
       </h1>
       <button
         className="text-accentText text-3xl font-bold uppercase cursor-pointer "
@@ -359,7 +359,7 @@ const UpholsteryCleaning = () => {
           className="m-8 border drop-shadow-md p-4 rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"
         >
           <ContactForm
-            title={"Contact us"}
+            title={"If you have questions, feel free to contact us"}
             fields={formFields as IFormField[]}
             btnText={"Sent message"}
             className="border drop-shadow-md px-4 py-3 text-center rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"

@@ -2,17 +2,22 @@
 
 import Image from "next/image";
 import ContactForm from "./ui/ContactForm";
+import Modal from "./ui/Modal";
 
-import { stainInfo, pricesCards, upholsteryCleaningSteps } from "../../data.js";
+import { pricesCards, upholsteryCleaningSteps } from "../../data.js";
+import { stainInfo } from "../../constant";
 import { CUC_PHONE, CUC_EMAIL } from "../../constant";
 import Card from "./ui/price-card/Card";
 import ProcessSteps from "./ui/ProgressStep";
 import { IFormField } from "../../type";
 import { useRouter } from "next/navigation";
 import { formFields } from "../../data";
+import Button from "./ui/Button";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (name: string) => {
     router.push(`/upholstery-cleaning#${name}`);
@@ -62,20 +67,35 @@ export default function Home() {
               at your location for hassle-free cleaning.
             </p>
           </div>
+          <Button
+            className={
+              "mb-4 hover:bg-opacity-80 hover:scale-105 transition-all duration-300 ease-in-out  drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2 justify-center"
+            }
+            toggleMenu={() => setIsModalOpen(true)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14 5l7 7-7 7M21 12H3"
+              />
+            </svg>
+            Get a Free Quote
+          </Button>
         </div>
-        <ContactForm
-          title={"Get a Free Estimate"}
-          fields={formFields as IFormField[]}
-          btnText="Get a free consultation"
-          className="m-4 md:m-8 md:max-w-80 xl:max-w-96 border drop-shadow-md px-4 py-3 rounded-3xl w-full bg-background md:w-2/5 md:ml-8 relative transition-all duration-300 hover:shadow-lg"
-        />
       </section>
       <section className="px-6">
         <h2 className="sm:mx-6 mt-8  mb-4 text-center ext-6xl py-9 uppercase text-2xl lg:text-3xl ">
           Deep upholstery cleaning for{" "}
           <span className=" text-accentText">stains and odors</span>.
         </h2>
-        <div className="grid-cols-2 gap-4 md:gap-8 md:grid-cols-3 lg:grid-cols-5 grid ">
+        <div className="grid grid-cols-4 gap-3  lg:grid-cols-5">
           {stainInfo.map((card, i) => {
             return (
               <Card
@@ -166,7 +186,7 @@ export default function Home() {
           completely
         </p>
         {pricesCards.length > 0 && (
-          <div className="grid-cols gap-4 md:gap-8 md:grid-cols-3 lg:grid-cols-5 grid m-6">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 m-6">
             {pricesCards.map((price, i) => {
               return (
                 <Card
@@ -182,7 +202,7 @@ export default function Home() {
                       height={300}
                       loading="lazy"
                     />
-                    <div className=" absolute -top-2 -right-2 w-20 h-20 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-custom-gradient text-black text-sm font-bold">
+                    <div className="absolute -top-2 -right-2  flex items-center justify-center rounded-full bg-custom-gradient text-black text-xs sm:text-sm md:text-base font-bold w-10 h-10 md:w-14 md:h-14 lg:w-20 lg:h-20 ">
                       from <br />
                       {price.price}
                     </div>
@@ -206,11 +226,25 @@ export default function Home() {
       </section>
       <section>
         <h2 className="sm:mx-6 mt-8  mb-4 text-center ext-6xl py-9 uppercase text-2xl lg:text-3xl">
-          Step-by-Step{" "}
+          Step-by-Step
           <span className="text-accentText">professional cleaning process</span>
         </h2>
         <ProcessSteps steps={upholsteryCleaningSteps} />;
       </section>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        className="rounded-3xl p-6"
+        ariaLabelledby="contact-form-title"
+      >
+        <ContactForm
+          title={"Get a Free Consultation"}
+          fields={formFields as IFormField[]}
+          btnText="Get Consultation"
+          onCloseModal={() => setIsModalOpen(false)}
+        />
+      </Modal>
     </>
   );
 }

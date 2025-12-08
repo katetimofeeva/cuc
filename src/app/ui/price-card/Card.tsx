@@ -25,13 +25,15 @@ const Card = ({ cardInfo, children, handleClick }: ICard) => {
     }
   };
 
+  const small = title ? "" : "hidden md:block";
   return (
     <div className={className}>
       <div>{children}</div>
-      <div className={`text-center my-2 ${card}`}>
+      <div className={`text-center my-2 ${card} ${small}`}>
         <h5 className="uppercase">{title}</h5>
         <p className="first-letter:uppercase">{description}</p>
       </div>
+
       {handleClick && (
         <Button
           className="mb-2 text-white  bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center transform hover:scale-110 transition"
