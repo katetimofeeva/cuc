@@ -362,7 +362,7 @@ const UpholsteryCleaning = () => {
             title={"If you have questions, feel free to contact us"}
             fields={formFields as IFormField[]}
             btnText={"Sent message"}
-            className="border drop-shadow-md px-4 py-3 text-center rounded-3xl w-full bg-background  relative transition-all duration-300 hover:shadow-lg"
+            className="border drop-shadow-md px-4 py-3 text-center rounded-3xl w-full  relative transition-all duration-300 hover:shadow-lg"
             onCloseModal={handlerOnCloseModal}
           />
           <div className="flex my-4 mx-auto text-center w-48 justify-between flex-col">

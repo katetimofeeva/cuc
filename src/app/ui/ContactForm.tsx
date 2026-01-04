@@ -162,7 +162,7 @@ const ContactForm = ({
       {title && (
         <h2
           id="form-title"
-          className="uppercase mx-3 font-semibold text-2xl mb-3 inline-block text-accentText"
+          className="uppercase mx-2 font-semibold text-2xl mb-4 inline-block text-accentText"
         >
           {title}
         </h2>
@@ -170,7 +170,7 @@ const ContactForm = ({
 
       {fields.map(({ name, type, placeholder, classField }) => (
         <div
-          className="flex flex-col w-full mb-6"
+          className="flex flex-col w-full mb-2 "
           key={name}
         >
           {type === "textarea" ? (
