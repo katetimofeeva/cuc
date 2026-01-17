@@ -13,7 +13,6 @@ const ContactForm = ({
   onCloseModal,
 }: IContactFormProps) => {
   const [formData, setFormData] = useState<IFormData>({});
-  // используем массив File для удобного управления и удаления
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<
     {
@@ -41,7 +40,6 @@ const ContactForm = ({
       const targetFiles = (e.target as HTMLInputElement).files;
       if (targetFiles) {
         const arr = Array.from(targetFiles);
-        // объединяем новые файлы с уже выбранными, избегая дубликатов (по имени+size+type)
         const merged = [...files, ...arr].filter(
           (f, idx, self) =>
             idx ===
@@ -50,9 +48,7 @@ const ContactForm = ({
             )
         );
         setFiles(merged);
-        // очищаем предыдущие object URLs
         previews.forEach(pv => URL.revokeObjectURL(pv.url));
-        // создаём превью для merged
         const p = merged.map(f => ({
           name: f.name,
           url: URL.createObjectURL(f),
@@ -60,7 +56,6 @@ const ContactForm = ({
           size: f.size,
         }));
         setPreviews(p);
-        // сброс native input чтобы позволить выбрать те же файлы снова и триггерить событие
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     } else {
@@ -76,7 +71,6 @@ const ContactForm = ({
     setIsLoading(true);
 
     const formDataToSend = new FormData();
-
     Object.keys(formData).forEach(key => {
       formDataToSend.append(key, formData[key]);
     });
@@ -95,16 +89,13 @@ const ContactForm = ({
 
       if (response.ok) {
         setStatus("success");
-        setMessage(
-          "Thank you for leaving your contact information! Our employee will contact you shortly."
-        );
+        setMessage("Thank you! Our employee will contact you shortly.");
       } else {
         setStatus("error");
         setMessage("Error sending message.");
       }
     } catch (error) {
       const typedError = error as ICustomError;
-      console.error("Error:", typedError);
       setMessage(typedError.message);
       setStatus("error");
     } finally {
@@ -112,10 +103,7 @@ const ContactForm = ({
     }
     setIsOpen(true);
     setFormData({});
-    // очищаем файлы и превью
-    files.forEach(() => {});
     setFiles([]);
-    previews.forEach(p => URL.revokeObjectURL(p.url));
     setPreviews([]);
 
     if (onCloseModal) {
@@ -130,13 +118,9 @@ const ContactForm = ({
     setFiles([]);
     previews.forEach(p => URL.revokeObjectURL(p.url));
     setPreviews([]);
-
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  // при размонтировании / изменении превью — очищаем object URLs
   useEffect(() => {
     return () => {
       previews.forEach(p => URL.revokeObjectURL(p.url));
@@ -150,158 +134,125 @@ const ContactForm = ({
       if (removed) URL.revokeObjectURL(removed.url);
       return prev.filter((_, i) => i !== index);
     });
-    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className={className}
-      aria-labelledby="form-title"
+      className={`flex flex-col max-w-full px-1 sm:px-4 ${className}`}
     >
       {title && (
-        <h2
-          id="form-title"
-          className="uppercase mx-2 font-semibold text-2xl mb-4 inline-block text-accentText"
-        >
+        <h2 className="uppercase font-bold text-base sm:text-lg mb-2 text-accentText text-center leading-tight">
           {title}
         </h2>
       )}
 
-      {fields.map(({ name, type, placeholder, classField }) => (
-        <div
-          className="flex flex-col w-full mb-2 "
-          key={name}
-        >
-          {type === "textarea" ? (
-            <textarea
-              name={name}
-              id={name}
-              placeholder={placeholder}
-              required
-              className={`${classField} h-32 resize-none  `}
-              onChange={handleChange}
-              aria-multiline="true"
-              value={formData[name] || ""}
-              aria-label={placeholder}
-            />
-          ) : (
-            <input
-              type={type}
-              name={name}
-              id={name}
-              placeholder={placeholder}
-              required
-              className={`${classField} `}
-              onChange={handleChange}
-              value={formData[name] || ""}
-              aria-label={placeholder}
-            />
-          )}
-        </div>
-      ))}
+      {/* Сетка полей: на очень маленьких экранах уменьшаем зазоры */}
+      <div className="grid grid-cols-1 gap-1.5 mb-2">
+        {fields.map(({ name, type, placeholder, classField }) => (
+          <div
+            key={name}
+            className="w-full"
+          >
+            {type === "textarea" ? (
+              <textarea
+                name={name}
+                placeholder={placeholder}
+                required
+                className={`${classField} h-16 sm:h-24 w-full text-xs sm:text-sm  rounded-lg border border-gray-300 outline-none focus:border-accentText`}
+                onChange={handleChange}
+                value={formData[name] || ""}
+              />
+            ) : (
+              <input
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                required
+                className={`${classField} h-9 sm:h-11 w-full text-xs sm:text-sm px-3 rounded-lg border border-gray-300 outline-none focus:border-accentText`}
+                onChange={handleChange}
+                value={formData[name] || ""}
+              />
+            )}
+          </div>
+        ))}
+      </div>
 
-      {/* Поле загрузки файлов */}
-      <div className="flex flex-col w-full mb-6">
+      {/* Сверхкомпактный блок загрузки */}
+      <div className="mb-2">
         <label
           htmlFor="files"
-          className="block text-white bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center hover:bg-opacity-90 transition duration-200 w-full md:mx-auto shadow-md hover:shadow-lg"
+          className="flex justify-center gap-2 text-white  bg-accentText py-3 px-4 rounded-xl cursor-pointer text-center text-sm font-medium hover:bg-opacity-90 transition shadow-sm w-full"
         >
-          Attach a photo of your furniture
+          <span>📷</span>
+          <span>
+            {previews.length > 0
+              ? `Files: ${previews.length}`
+              : "Add Furniture Photo"}
+          </span>
         </label>
         <input
           type="file"
           id="files"
-          name="files"
           multiple
           className="sr-only"
           onChange={handleChange}
           ref={fileInputRef}
-          aria-label="Attach a photo of your furniture"
+          accept="image/*"
         />
+
+        {/* Мини-превью (горизонтальные и очень маленькие) */}
         {previews.length > 0 && (
-          <div className="mt-3 grid grid-cols-3 gap-2">
+          <div className="flex gap-1.5 overflow-x-auto py-1 no-scrollbar">
             {previews.map((p, i) => (
               <div
                 key={p.url}
-                className="relative border rounded-md overflow-hidden p-1 bg-white flex flex-col items-center justify-center"
+                className="relative flex-shrink-0 w-12 h-12 rounded-md overflow-hidden shadow-sm"
               >
-                {p.type && p.type.startsWith("image") ? (
-                  // маленькое превью
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={p.url}
-                    alt={p.name}
-                    className="w-20 h-20 object-cover"
-                  />
-                ) : (
-                  <div className="w-20 h-20 flex items-center justify-center bg-gray-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-gray-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 7h10M7 11h10M7 15h10"
-                      />
-                    </svg>
-                  </div>
-                )}
+                <img
+                  src={p.url}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
                 <button
                   type="button"
                   onClick={() => removeFileAt(i)}
-                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
-                  aria-label={`Remove ${p.name}`}
+                  className="absolute top-0 right-0  bg-accentText text-white w-4 h-4 flex items-center justify-center text-[10px]"
                 >
                   ×
                 </button>
-                <div className="text-xs mt-1 text-center">{p.name}</div>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      <div>
-        <Button
-          type="submit"
-          className="mb-4 hover:bg-opacity-80 hover:scale-105 transition-all duration-300 ease-in-out  drop-shadow-md font-bold bg-custom-gradient hover:bg-hover-custom-gradient rounded-3xl px-4 py-4 flex items-center gap-2 w-full justify-center"
-          disabled={isLoading}
-          aria-label={isLoading ? "Sending form data" : btnText}
-        >
-          {isLoading ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              Sending...
-            </div>
-          ) : (
-            <>
-              {btnText}
-              <Image
-                src={"/send.svg"}
-                alt="Send icon"
-                width={16}
-                height={16}
-                aria-hidden="true"
-              />
-            </>
-          )}
-        </Button>
-      </div>
-      <p className="text-sm text-gray-500 text-center">
-        You agree to our terms and conditions
+      {/* Кнопка отправки - высота h-10 для экономии места */}
+      <Button
+        type="submit"
+        className="h-10 sm:h-12 text-xs sm:text-sm font-bold bg-custom-gradient rounded-xl w-full flex items-center gap-2 justify-center shadow-md active:scale-95"
+        disabled={isLoading}
+      >
+        {isLoading ? "Sending..." : btnText}
+        {!isLoading && (
+          <Image
+            src="/send.svg"
+            alt=""
+            width={12}
+            height={12}
+          />
+        )}
+      </Button>
+
+      <p className="text-[9px]  text-center mt-2 leading-none">
+        By clicking, you agree to our terms
       </p>
+
       {isOpen && (
         <Notification
           message={message}
           onClose={clearForm}
           type={status}
-          aria-live="polite"
         />
       )}
     </form>
