@@ -12,10 +12,10 @@ const menu = [
   //   label: "Blog",
   // },
   { href: "/", label: "Home" },
-  {
-    href: "/upholstery-cleaning",
-    label: "Services",
-  },
+  // {
+  //   href: "/upholstery-cleaning",
+  //   label: "Services",
+  // },
   {
     href: "/contact",
     label: "Contact",

@@ -11,6 +11,7 @@ interface ICard {
     size?: number;
     card?: string;
     id?: string;
+    name?: string;
   };
   children: React.ReactNode;
   handleClick?: (name: string) => void;
@@ -20,8 +21,8 @@ const Card = ({ cardInfo, children, handleClick }: ICard) => {
   const { title, description, className, card } = cardInfo;
 
   const customClick = () => {
-    if (handleClick && cardInfo.id) {
-      handleClick(cardInfo.id);
+    if (handleClick && cardInfo.name) {
+      handleClick(cardInfo.name);
     }
   };
 
@@ -34,7 +35,7 @@ const Card = ({ cardInfo, children, handleClick }: ICard) => {
         <p className="first-letter:uppercase">{description}</p>
       </div>
 
-      {handleClick && (
+      {handleClick && cardInfo.id !== "other" && (
         <Button
           className="mb-2 text-white  bg-accentText py-2 px-4 rounded-lg cursor-pointer text-center transform hover:scale-110 transition"
           toggleMenu={customClick}

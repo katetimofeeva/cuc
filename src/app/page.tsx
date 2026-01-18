@@ -14,13 +14,15 @@ import { useRouter } from "next/navigation";
 import { formFields } from "../../data";
 import Button from "./ui/Button";
 import { useState } from "react";
+import SocialLinks from "./ui/SocialLinks";
+import { socialLinks } from "../../data";
 
 export default function Home() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (name: string) => {
-    router.push(`/upholstery-cleaning#${name}`);
+    router.push(`/upholstery-cleaning/${name}`);
   };
   return (
     <>
@@ -241,9 +243,24 @@ export default function Home() {
         <ContactForm
           title={"Get a Free Consultation"}
           fields={formFields as IFormField[]}
-          btnText="Get Consultation"
+          btnText="Get My Free Estimate"
           onCloseModal={() => setIsModalOpen(false)}
         />
+        <div className="flex my-4 mx-auto text-center w-48 justify-between flex-col">
+          <p className="mb-4">Message us directly </p>
+          <div className="flex w-48 justify-between flex-row">
+            {socialLinks.map(({ src, alt, href }) => {
+              return (
+                <SocialLinks
+                  key={alt}
+                  src={src}
+                  alt={alt}
+                  href={href}
+                />
+              );
+            })}
+          </div>
+        </div>
       </Modal>
     </>
   );

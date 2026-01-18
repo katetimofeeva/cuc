@@ -76,6 +76,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "sofa",
+    name: "furniture",
   },
   {
     title: "L-shaper couch",
@@ -85,6 +86,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "sofa",
+    name: "furniture",
   },
   {
     title: "armchair",
@@ -94,6 +96,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "sofa",
+    name: "furniture",
   },
   {
     title: "large sectional",
@@ -103,6 +106,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "sofa",
+    name: "furniture",
   },
   {
     title: "mattress",
@@ -112,6 +116,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "mattress",
+    name: "mattress",
   },
   {
     title: "headboard",
@@ -121,6 +126,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "headboard",
+    name: "headboard",
   },
   {
     title: "chair",
@@ -130,6 +136,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "chair",
+    name: "furniture",
   },
   {
     title: "chair-office",
@@ -139,6 +146,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "chair",
+    name: "furniture",
   },
   {
     title: "sofa cushions",
@@ -157,6 +165,7 @@ export const pricesCards = [
     className:
       "border shadow-border-shadow p-4 rounded-3xl flex flex-col justify-between items-center",
     id: "rug cleaning",
+    name: "rug-cleaning",
   },
 ];
 
@@ -395,7 +404,7 @@ export const priceMap = {
       "Headboard cleaning & drying & odor removal": 140,
     },
   },
-  "rug cleaning": {
+  "rug-cleaning": {
     "4x6 feet": {
       "Area rug cleaning": 50,
       "Area rug cleaning & drying": 65,
@@ -435,10 +444,10 @@ export const categories = {
     "Small sofa 3 seats",
     "L-shaper couch 4 seats",
     "L-shaper couch 5 seats",
-    "L-shaper couch 6 seats",
-    "Large sectional 7 seats",
-    "Large sectional 8 seats",
-    "Large sectional 9+ seats",
+    // "L-shaper couch 6 seats",
+    // "Large sectional 7 seats",
+    // "Large sectional 8 seats",
+    // "Large sectional 9+ seats",
     "U-shaper sectional sofa with 5 seats",
     "U-shaper sectional sofa with 6 seats",
     "Armchair",
@@ -455,7 +464,7 @@ export const categories = {
     "Headboard of king bed",
     "Headboard of cal king bed",
   ],
-  "rug cleaning": [
+  "rug-cleaning": [
     "4x6 feet",
     "5x8 feet",
     "6x9 feet",
